@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" fill="none">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#2a2522"/>
+      <stop offset="100%" stop-color="#121010"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#bg)"/>
+  <g stroke="#cfc7b8" stroke-width="2.2" fill="none" opacity="0.9">
+    <!-- bandana / head -->
+    <path d="M180,300 C150,180 220,90 300,90 C380,90 450,180 420,300"/>
+    <path d="M180,300 C150,180 220,90 300,90 C380,90 450,180 420,300" fill="#4a423b" fill-opacity="0.35"/>
+    <!-- bandana wrap -->
+    <path d="M176,150 C240,120 360,120 424,150" stroke="#c9a24b"/>
+    <path d="M200,118 l-12,-26 M250,100 l-6,-30 M350,100 l6,-30 M400,118 l12,-26" stroke="#c9a24b" opacity="0.6"/>
+    <!-- eyes (shaded, contemplative) -->
+    <path d="M232,250 q34,-26 64,0" />
+    <path d="M308,250 q34,-26 64,0" />
+    <circle cx="262" cy="262" r="9" fill="#cfc7b8"/>
+    <circle cx="338" cy="262" r="9" fill="#cfc7b8"/>
+    <!-- nose + lips -->
+    <path d="M300,270 l-10,70 q10,16 24,4"/>
+    <path d="M268,372 q32,22 64,0"/>
+    <!-- jaw / neck -->
+    <path d="M196,300 C190,430 240,520 300,520 C360,520 410,430 404,300"/>
+    <path d="M250,520 l-6,90 M350,520 l6,90"/>
+    <!-- shoulders -->
+    <path d="M150,800 C150,640 230,600 300,600 C370,600 450,640 450,800"/>
+    <!-- smoke wisps -->
+    <path d="M470,360 C520,330 500,280 540,260" opacity="0.4" stroke="#c9a24b"/>
+    <path d="M130,360 C80,330 100,280 60,260" opacity="0.4" stroke="#c9a24b"/>
+  </g>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" fill="none">
+  <g stroke="#c9a24b" stroke-width="2.6" fill="none" opacity="0.95">
+    <!-- praying hands -->
+    <path d="M250,560 C200,440 200,220 235,120 C246,86 254,86 250,140 L250,520"/>
+    <path d="M250,560 C300,440 300,220 265,120 C254,86 246,86 250,140 L250,520"/>
+    <!-- finger lines -->
+    <path d="M222,150 L222,470 M236,128 L236,470 M264,128 L264,470 M278,150 L278,470" opacity="0.5"/>
+    <!-- halo of rays -->
+    <g opacity="0.5">
+      <line x1="250" y1="90" x2="250" y2="20"/>
+      <line x1="250" y1="90" x2="180" y2="40"/>
+      <line x1="250" y1="90" x2="320" y2="40"/>
+      <line x1="250" y1="90" x2="140" y2="90"/>
+      <line x1="250" y1="90" x2="360" y2="90"/>
+    </g>
+    <!-- rosary -->
+    <path d="M250,540 C210,560 180,540 170,500" />
+    <circle cx="172" cy="498" r="5" fill="#c9a24b"/>
+    <circle cx="186" cy="520" r="5" fill="#c9a24b"/>
+    <circle cx="208" cy="540" r="5" fill="#c9a24b"/>
+    <path d="M170,500 l-8,30 m8,-30 l8,30 m-8,18 l0,24" stroke-width="2"/>
+  </g>
+</svg>
