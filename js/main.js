@@ -144,10 +144,10 @@
      WORK GALLERY — generated SVG artworks (no external assets)
      ========================================================= */
   const palettes = {
-    portrait:  ["#1b1817", "#4a423b", "#c9a24b"],
-    lettering: ["#15110f", "#2a211d", "#e7c878"],
-    religious: ["#181311", "#3a2420", "#b8302c"],
-    fineline:  ["#13110f", "#33302b", "#cfc7b8"],
+    portrait:  ["#241f1c", "#60554b", "#d9b15f"],
+    lettering: ["#201a16", "#42352b", "#eccd82"],
+    religious: ["#241a17", "#50382f", "#cf4a44"],
+    fineline:  ["#1d1915", "#48413a", "#d8d0c1"],
   };
 
   const pieces = [
@@ -231,7 +231,7 @@
           </radialGradient>
         </defs>
         <rect width='400' height='460' fill='url(#${grad})'/>
-        <rect width='400' height='460' fill='none' stroke='${accent}' stroke-opacity='0.15' stroke-width='2'/>
+        <rect width='400' height='460' fill='none' stroke='${accent}' stroke-opacity='0.25' stroke-width='2'/>
         ${inner}
       </svg>`);
   }
@@ -240,16 +240,19 @@
   const grid = $("#workGrid");
   pieces.forEach((p, i) => {
     const art = artSVG(p.motif, p.cat, i);
+    const num = String(i + 1).padStart(2, "0");
     const item = document.createElement("a");
     item.className = "work-item reveal " + (p.size || "");
     item.href = IG_URL;
     item.target = "_blank";
     item.rel = "noopener";
-    item.setAttribute("data-cat", p.cat);
     item.setAttribute("data-cursor", "hover");
     item.setAttribute("aria-label", `${p.title} — view on Instagram @cortezs_tattoos`);
+    // The <img> shows a real photo if assets/work/NN.jpg exists; otherwise it
+    // removes itself on error and the generated art beneath stays visible.
     item.innerHTML = `
       <div class="work-item__art" style="background:url('${art}') center/cover no-repeat"></div>
+      <img class="work-item__photo" src="assets/work/${num}.jpg" alt="${p.title}" loading="lazy" onerror="this.remove()" />
       <span class="work-item__view">
         <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="2" width="20" height="20" rx="5"></rect>
@@ -260,24 +263,9 @@
       </span>
       <div class="work-item__overlay">
         <h3 class="work-item__title">${p.title}</h3>
-        <span class="work-item__tag">${catLabel[p.cat]}</span>
       </div>`;
     grid.appendChild(item);
     io.observe(item);
-  });
-
-  /* ---------- Filters ---------- */
-  const filtersWrap = $("#workFilters");
-  filtersWrap.addEventListener("click", (e) => {
-    const btn = e.target.closest(".filter");
-    if (!btn) return;
-    $$(".filter", filtersWrap).forEach((b) => b.classList.remove("is-active"));
-    btn.classList.add("is-active");
-    const f = btn.getAttribute("data-filter");
-    $$(".work-item", grid).forEach((item) => {
-      const show = f === "all" || item.getAttribute("data-cat") === f;
-      item.classList.toggle("is-hidden", !show);
-    });
   });
 
   /* =========================================================
