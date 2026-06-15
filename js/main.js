@@ -236,37 +236,95 @@
       </svg>`);
   }
 
+  /* =========================================================
+     GALLERY SOURCE — Google Drive folder (auto-updating)
+     ---------------------------------------------------------
+     Paste your shared Drive folder ID + a Google API key below and the grid
+     will display every image in that folder automatically. The artist just
+     drops photos into the shared folder — no uploads to the site required.
+     Leave these blank to fall back to local images in assets/work/.
+     ========================================================= */
+  const DRIVE_FOLDER_ID = "";   // e.g. "1A2b3C4d5E6f..."  (from the folder URL)
+  const DRIVE_API_KEY   = "";   // Google Cloud API key with the Drive API enabled
+
   const IG_URL = "https://www.instagram.com/cortezs_tattoos/";
   const grid = $("#workGrid");
-  pieces.forEach((p, i) => {
-    const art = artSVG(p.motif, p.cat, i);
-    const num = String(i + 1).padStart(2, "0");
+  // Repeating size rhythm keeps the asymmetric layout for any number of photos.
+  const SIZES = ["tall", "", "big", "", "", "wide", "tall", "big", "", "", "", "tall"];
+  const IG_PILL = `
+    <span class="work-item__view">
+      <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle>
+      </svg>
+      Instagram
+    </span>`;
+
+  function buildTile(opts) {
     const item = document.createElement("a");
-    item.className = "work-item reveal " + (p.size || "");
-    item.href = IG_URL;
+    item.className = "work-item reveal " + (opts.size || "");
+    item.href = opts.href || IG_URL;
     item.target = "_blank";
     item.rel = "noopener";
     item.setAttribute("data-cursor", "hover");
-    item.setAttribute("aria-label", `${p.title} — view on Instagram @cortezs_tattoos`);
-    // The <img> shows a real photo if assets/work/NN.jpg exists; otherwise it
-    // removes itself on error and the generated art beneath stays visible.
+    item.setAttribute("aria-label", (opts.title || "Tattoo work") + " — Cortez's Tattoos");
+    const photo = opts.photo
+      ? `<img class="work-item__photo" src="${opts.photo}" alt="${opts.title || "Tattoo work"}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()" />`
+      : "";
+    const title = opts.title ? `<h3 class="work-item__title">${opts.title}</h3>` : "";
     item.innerHTML = `
-      <div class="work-item__art" style="background:url('${art}') center/cover no-repeat"></div>
-      <img class="work-item__photo" src="assets/work/${num}.jpg" alt="${p.title}" loading="lazy" onerror="this.remove()" />
-      <span class="work-item__view">
-        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5"></rect>
-          <circle cx="12" cy="12" r="4"></circle>
-          <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle>
-        </svg>
-        Instagram
-      </span>
-      <div class="work-item__overlay">
-        <h3 class="work-item__title">${p.title}</h3>
-      </div>`;
+      <div class="work-item__art" style="background:url('${opts.art}') center/cover no-repeat"></div>
+      ${photo}
+      ${IG_PILL}
+      <div class="work-item__overlay">${title}</div>`;
     grid.appendChild(item);
     io.observe(item);
-  });
+  }
+
+  // Fallback: generated placeholders + any local assets/work/NN.jpg files.
+  function renderFallback() {
+    pieces.forEach((p, i) => {
+      buildTile({
+        art: artSVG(p.motif, p.cat, i),
+        photo: `assets/work/${String(i + 1).padStart(2, "0")}.jpg`,
+        title: p.title,
+        size: p.size,
+      });
+    });
+  }
+
+  // Live: pull every image from the shared Google Drive folder.
+  async function loadDriveGallery() {
+    if (!DRIVE_FOLDER_ID || !DRIVE_API_KEY) return false;
+    try {
+      const q = encodeURIComponent(
+        `'${DRIVE_FOLDER_ID}' in parents and mimeType contains 'image/' and trashed = false`
+      );
+      const url =
+        `https://www.googleapis.com/drive/v3/files?q=${q}&key=${DRIVE_API_KEY}` +
+        `&fields=files(id,name)&orderBy=createdTime desc&pageSize=24`;
+      const res = await fetch(url);
+      if (!res.ok) return false;
+      const files = ((await res.json()).files || []).filter((f) => f.id);
+      if (!files.length) return false;
+      grid.innerHTML = "";
+      const cats = ["portrait", "lettering", "religious", "fineline"];
+      files.forEach((f, i) => {
+        buildTile({
+          art: artSVG("rose", cats[i % cats.length], i),
+          photo: `https://drive.google.com/thumbnail?id=${f.id}&sz=w1600`,
+          size: SIZES[i % SIZES.length],
+          href: IG_URL,
+        });
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  loadDriveGallery().then((ok) => { if (!ok) renderFallback(); });
 
   /* =========================================================
      BOOKING FORM — validation + faux submit
