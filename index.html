@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cortez's Tattoos — Master of Chicano-style fine line, black & grey tattoo artistry. Custom work, lettering, portraits & religious iconography. Book your session." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta property="og:title" content="Cortez's Tattoos — Chicano Fine Line Artistry" />
+  <meta property="og:description" content="Black & grey, fine line, lettering & portraits in the authentic Chicano tradition." />
+  <meta property="og:type" content="website" />
+  <title>Cortez's Tattoos — Chicano Fine Line Artistry</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=Mr+Dafoe&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Film grain + vignette overlays -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__inner">
+      <div class="preloader__mark">C</div>
+      <div class="preloader__bar"><span></span></div>
+      <div class="preloader__label">Inking the page<span class="dots"></span></div>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <a href="#home" class="nav__brand" data-cursor="hover">
+      <span class="nav__brand-mark">Cortez's</span>
+      <span class="nav__brand-sub">Tattoos</span>
+    </a>
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a href="#about" data-cursor="hover">About</a>
+      <a href="#work" data-cursor="hover">Work</a>
+      <a href="#process" data-cursor="hover">Process</a>
+      <a href="#booking" class="nav__cta" data-cursor="hover">Book a Session</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main>
+    <!-- ===== HERO / LANDING ===== -->
+    <section class="hero" id="home">
+      <div class="hero__bg" data-parallax="0.25" aria-hidden="true">
+        <div class="hero__rose"></div>
+      </div>
+      <div class="hero__noise" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow reveal">Est. 2009 · East L.A. raised</p>
+        <h1 class="hero__title">
+          <span class="line"><span class="reveal-up">Ink that</span></span>
+          <span class="line"><span class="reveal-up script">tells your</span></span>
+          <span class="line"><span class="reveal-up">story.</span></span>
+        </h1>
+        <p class="hero__lead reveal">
+          Cortez's Tattoos is a studio devoted to the craft of
+          <em>Chicano fine line</em> — black &amp; grey portraits, sacred
+          lettering, and soulful custom work that honors where you come from.
+        </p>
+        <div class="hero__actions reveal">
+          <a href="#work" class="btn btn--solid" data-cursor="hover">View the Work</a>
+          <a href="#booking" class="btn btn--ghost" data-cursor="hover">Book a Session</a>
+        </div>
+      </div>
+
+      <div class="hero__marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>Black &amp; Grey</span><span>·</span>
+          <span>Fine Line</span><span>·</span>
+          <span>Lettering</span><span>·</span>
+          <span>Portraits</span><span>·</span>
+          <span>Religious</span><span>·</span>
+          <span>Lowrider Culture</span><span>·</span>
+          <span>Black &amp; Grey</span><span>·</span>
+          <span>Fine Line</span><span>·</span>
+          <span>Lettering</span><span>·</span>
+          <span>Portraits</span><span>·</span>
+          <span>Religious</span><span>·</span>
+          <span>Lowrider Culture</span><span>·</span>
+        </div>
+      </div>
+
+      <a href="#about" class="hero__scroll" aria-label="Scroll down" data-cursor="hover">
+        <span>Scroll</span>
+        <span class="hero__scroll-line"></span>
+      </a>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about" id="about">
+      <div class="section-head reveal">
+        <span class="section-num">01</span>
+        <h2 class="section-title">The Artist</h2>
+      </div>
+
+      <div class="about__grid">
+        <div class="about__portrait reveal" data-cursor="hover">
+          <div class="about__portrait-frame" data-parallax="0.08">
+            <div class="portrait-art" aria-hidden="true"></div>
+          </div>
+          <div class="about__badge">
+            <span>Cortez</span>
+            <span>Tattoos</span>
+          </div>
+        </div>
+
+        <div class="about__body">
+          <p class="about__kicker reveal">A hand guided by heritage</p>
+          <p class="about__text reveal">
+            Raised on the murals, lowriders, and hand-painted signs of East
+            Los Angeles, <strong>Cortez</strong> turned a childhood spent
+            sketching into a lifetime devoted to the needle. Over fifteen
+            years he's refined a single-needle technique that turns smoke,
+            shadow, and devotion into skin-deep stories.
+          </p>
+          <p class="about__text reveal">
+            Every piece begins as a conversation. Cortez listens for the
+            people, the prayers, and the places that made you — then renders
+            them in the soft gradients and razor-sharp script that define
+            authentic Chicano black &amp; grey.
+          </p>
+
+          <ul class="about__specs reveal">
+            <li><span class="dot"></span>Single-needle fine line</li>
+            <li><span class="dot"></span>Black &amp; grey realism</li>
+            <li><span class="dot"></span>Old English &amp; script lettering</li>
+            <li><span class="dot"></span>Religious &amp; cultural iconography</li>
+          </ul>
+
+          <div class="about__stats">
+            <div class="stat reveal">
+              <span class="stat__num" data-count="15">0</span><span class="stat__plus">+</span>
+              <span class="stat__label">Years on the gun</span>
+            </div>
+            <div class="stat reveal">
+              <span class="stat__num" data-count="4200">0</span><span class="stat__plus">+</span>
+              <span class="stat__label">Pieces tattooed</span>
+            </div>
+            <div class="stat reveal">
+              <span class="stat__num" data-count="3">0</span>
+              <span class="stat__label">Convention awards</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WORK / GALLERY ===== -->
+    <section class="work" id="work">
+      <div class="section-head reveal">
+        <span class="section-num">02</span>
+        <h2 class="section-title">The Work</h2>
+      </div>
+      <p class="work__intro reveal">
+        A living portfolio of healed and fresh pieces. Filter by style —
+        tap any piece to see it full bleed.
+      </p>
+
+      <div class="work__filters reveal" id="workFilters">
+        <button class="filter is-active" data-filter="all" data-cursor="hover">All</button>
+        <button class="filter" data-filter="portrait" data-cursor="hover">Portraits</button>
+        <button class="filter" data-filter="lettering" data-cursor="hover">Lettering</button>
+        <button class="filter" data-filter="religious" data-cursor="hover">Religious</button>
+        <button class="filter" data-filter="fineline" data-cursor="hover">Fine Line</button>
+      </div>
+
+      <div class="work__grid" id="workGrid">
+        <!-- Items injected by JS -->
+      </div>
+    </section>
+
+    <!-- ===== PROCESS ===== -->
+    <section class="process" id="process">
+      <div class="section-head reveal">
+        <span class="section-num">03</span>
+        <h2 class="section-title">The Process</h2>
+      </div>
+
+      <div class="process__steps">
+        <article class="step reveal">
+          <span class="step__num">01</span>
+          <h3>Consultation</h3>
+          <p>We sit down — in person or virtual — to talk story, reference, placement, and meaning. No idea is too rough.</p>
+        </article>
+        <article class="step reveal">
+          <span class="step__num">02</span>
+          <h3>Custom Design</h3>
+          <p>Cortez hand-draws a one-of-one stencil built around your body and your story. Revisions until it's right.</p>
+        </article>
+        <article class="step reveal">
+          <span class="step__num">03</span>
+          <h3>The Session</h3>
+          <p>Sterile, private, and unhurried. We work at the pace your skin and your piece deserve.</p>
+        </article>
+        <article class="step reveal">
+          <span class="step__num">04</span>
+          <h3>Aftercare</h3>
+          <p>You leave with a wrapped piece and a full care plan, plus a free touch-up window so it heals perfect.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== BOOKING ===== -->
+    <section class="booking" id="booking">
+      <div class="booking__art" aria-hidden="true" data-parallax="0.12"></div>
+      <div class="booking__inner">
+        <div class="section-head reveal">
+          <span class="section-num">04</span>
+          <h2 class="section-title">Book a Session</h2>
+        </div>
+        <p class="booking__lead reveal">
+          Tell Cortez what you're carrying. Every request gets a personal
+          reply within 48 hours with availability and a deposit quote.
+        </p>
+
+        <form class="booking__form" id="bookingForm" novalidate>
+          <div class="field reveal">
+            <input type="text" id="name" name="name" required placeholder=" " data-cursor="text" />
+            <label for="name">Full name</label>
+            <span class="field__error" data-for="name"></span>
+          </div>
+
+          <div class="field reveal">
+            <input type="email" id="email" name="email" required placeholder=" " data-cursor="text" />
+            <label for="email">Email</label>
+            <span class="field__error" data-for="email"></span>
+          </div>
+
+          <div class="field reveal">
+            <input type="tel" id="phone" name="phone" placeholder=" " data-cursor="text" />
+            <label for="phone">Phone <span class="opt">(optional)</span></label>
+          </div>
+
+          <div class="field reveal">
+            <select id="style" name="style" required data-cursor="hover">
+              <option value="" disabled selected></option>
+              <option value="portrait">Portrait — black &amp; grey</option>
+              <option value="lettering">Lettering / script</option>
+              <option value="religious">Religious / iconography</option>
+              <option value="fineline">Fine line / single needle</option>
+              <option value="custom">Custom — let's talk</option>
+            </select>
+            <label for="style">Style</label>
+            <span class="field__error" data-for="style"></span>
+          </div>
+
+          <div class="field field--row reveal">
+            <div>
+              <input type="text" id="placement" name="placement" placeholder=" " data-cursor="text" />
+              <label for="placement">Placement</label>
+            </div>
+            <div>
+              <input type="text" id="size" name="size" placeholder=" " data-cursor="text" />
+              <label for="size">Approx. size</label>
+            </div>
+          </div>
+
+          <div class="field field--full reveal">
+            <textarea id="idea" name="idea" rows="4" required placeholder=" " data-cursor="text"></textarea>
+            <label for="idea">Your idea &amp; story</label>
+            <span class="field__error" data-for="idea"></span>
+          </div>
+
+          <button type="submit" class="btn btn--solid btn--block reveal" data-cursor="hover">
+            <span>Send Request</span>
+          </button>
+
+          <p class="booking__success" id="bookingSuccess" hidden>
+            Solid. Your request is in — Cortez will reach out within 48 hours.
+            <span>Stay creative.</span>
+          </p>
+        </form>
+
+        <aside class="booking__info reveal">
+          <div>
+            <h4>Studio</h4>
+            <p>1907 Cesar Chavez Ave<br />East Los Angeles, CA</p>
+          </div>
+          <div>
+            <h4>Hours</h4>
+            <p>Tue – Sat · 11am – 8pm<br />By appointment only</p>
+          </div>
+          <div>
+            <h4>Reach out</h4>
+            <p>
+              <a href="mailto:ink@corteztattoos.com" data-cursor="hover">ink@corteztattoos.com</a><br />
+              <a href="#" data-cursor="hover">@cortez.tattoos</a>
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__big" aria-hidden="true">CORTEZ</div>
+    <div class="footer__row">
+      <span class="footer__brand">Cortez's Tattoos</span>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="#about" data-cursor="hover">About</a>
+        <a href="#work" data-cursor="hover">Work</a>
+        <a href="#process" data-cursor="hover">Process</a>
+        <a href="#booking" data-cursor="hover">Book</a>
+      </nav>
+      <span class="footer__copy">© <span id="year"></span> Cortez's Tattoos · East L.A.</span>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Close" data-cursor="hover">&times;</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous" data-cursor="hover">&#8249;</button>
+    <div class="lightbox__stage" id="lightboxStage"></div>
+    <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next" data-cursor="hover">&#8250;</button>
+    <div class="lightbox__caption" id="lightboxCaption"></div>
+  </div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
