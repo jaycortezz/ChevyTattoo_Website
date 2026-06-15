@@ -236,25 +236,34 @@
       </svg>`);
   }
 
+  const IG_URL = "https://www.instagram.com/cortezs_tattoos/";
   const grid = $("#workGrid");
-  const built = [];
   pieces.forEach((p, i) => {
     const art = artSVG(p.motif, p.cat, i);
-    const item = document.createElement("article");
+    const item = document.createElement("a");
     item.className = "work-item reveal " + (p.size || "");
+    item.href = IG_URL;
+    item.target = "_blank";
+    item.rel = "noopener";
     item.setAttribute("data-cat", p.cat);
     item.setAttribute("data-cursor", "hover");
-    item.setAttribute("data-index", i);
+    item.setAttribute("aria-label", `${p.title} — view on Instagram @cortezs_tattoos`);
     item.innerHTML = `
       <div class="work-item__art" style="background:url('${art}') center/cover no-repeat"></div>
-      <span class="work-item__view">View</span>
+      <span class="work-item__view">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+          <circle cx="12" cy="12" r="4"></circle>
+          <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle>
+        </svg>
+        Instagram
+      </span>
       <div class="work-item__overlay">
         <h3 class="work-item__title">${p.title}</h3>
         <span class="work-item__tag">${catLabel[p.cat]}</span>
       </div>`;
     grid.appendChild(item);
     io.observe(item);
-    built.push({ ...p, art });
   });
 
   /* ---------- Filters ---------- */
@@ -269,56 +278,6 @@
       const show = f === "all" || item.getAttribute("data-cat") === f;
       item.classList.toggle("is-hidden", !show);
     });
-  });
-
-  /* ---------- Lightbox ---------- */
-  const lb = $("#lightbox");
-  const lbStage = $("#lightboxStage");
-  const lbCap = $("#lightboxCaption");
-  let current = 0;
-
-  function visibleItems() {
-    return $$(".work-item", grid).filter((el) => !el.classList.contains("is-hidden"));
-  }
-  function openLightbox(index) {
-    current = index;
-    renderLightbox();
-    lb.classList.add("is-open");
-    lb.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-  }
-  function renderLightbox() {
-    const p = built[current];
-    lbStage.innerHTML = `<div style="background:url('${p.art}') center/cover no-repeat"></div>`;
-    lbCap.innerHTML = `<b>${p.title}</b>${catLabel[p.cat]}`;
-  }
-  function closeLightbox() {
-    lb.classList.remove("is-open");
-    lb.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-  }
-  function step(dir) {
-    const vis = visibleItems();
-    const idxs = vis.map((el) => parseInt(el.getAttribute("data-index"), 10));
-    let pos = idxs.indexOf(current);
-    pos = (pos + dir + idxs.length) % idxs.length;
-    current = idxs[pos];
-    renderLightbox();
-  }
-  grid.addEventListener("click", (e) => {
-    const item = e.target.closest(".work-item");
-    if (!item) return;
-    openLightbox(parseInt(item.getAttribute("data-index"), 10));
-  });
-  $("#lightboxClose").addEventListener("click", closeLightbox);
-  $("#lightboxNext").addEventListener("click", () => step(1));
-  $("#lightboxPrev").addEventListener("click", () => step(-1));
-  lb.addEventListener("click", (e) => { if (e.target === lb) closeLightbox(); });
-  document.addEventListener("keydown", (e) => {
-    if (!lb.classList.contains("is-open")) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowRight") step(1);
-    if (e.key === "ArrowLeft") step(-1);
   });
 
   /* =========================================================
