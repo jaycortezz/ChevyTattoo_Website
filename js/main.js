@@ -244,8 +244,8 @@
      drops photos into the shared folder — no uploads to the site required.
      Leave these blank to fall back to local images in assets/work/.
      ========================================================= */
-  const DRIVE_FOLDER_ID = "";   // e.g. "1A2b3C4d5E6f..."  (from the folder URL)
-  const DRIVE_API_KEY   = "";   // Google Cloud API key with the Drive API enabled
+  const DRIVE_FOLDER_ID = "1aeAwO7TnnH0lTbRx4-S27w35y6P9OAey";   // shared folder
+  const DRIVE_API_KEY   = "AIzaSyCW1V1aNRS99TYooWB3fudj_8wOAyF25FY"; // Drive API, referrer-restricted
 
   const IG_URL = "https://www.instagram.com/cortezs_tattoos/";
   const grid = $("#workGrid");
