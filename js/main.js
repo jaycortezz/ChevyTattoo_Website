@@ -361,8 +361,28 @@
   });
 
   const WEB3FORMS_KEY = "e6c85d69-3383-4876-99d7-798dd42f98b6";
+
+  /* Cloudinary (free) hosts the uploaded reference photos so they can be
+     delivered as links in the email. Fill both in to enable real uploads;
+     leave blank to just list the filenames instead.
+       1. CLOUDINARY_CLOUD  — your Cloudinary "cloud name"
+       2. CLOUDINARY_PRESET — an UNSIGNED upload preset name */
+  const CLOUDINARY_CLOUD = "";
+  const CLOUDINARY_PRESET = "";
+  const MAX_PHOTO_BYTES = 10 * 1024 * 1024; // 10MB per photo
+
   const errorBox = $("#bookingError");
   const val = (id) => { const el = $("#" + id); return el ? el.value.trim() : ""; };
+  const showError = (msg) => { if (errorBox) { errorBox.textContent = msg; errorBox.hidden = false; errorBox.scrollIntoView({ behavior: "smooth", block: "center" }); } };
+
+  function uploadToCloudinary(file) {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", CLOUDINARY_PRESET);
+    return fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/auto/upload`, { method: "POST", body: data })
+      .then((r) => r.json())
+      .then((j) => { if (!j.secure_url) throw new Error("upload failed"); return j.secure_url; });
+  }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -379,6 +399,32 @@
 
     const btn = $("button[type=submit]", form);
     const btnSpan = btn.querySelector("span");
+    const refsEl = $("#refs");
+    const files = refsEl && refsEl.files ? Array.from(refsEl.files) : [];
+    const cloudOn = CLOUDINARY_CLOUD && CLOUDINARY_PRESET;
+
+    if (files.length && cloudOn && files.some((f) => f.size > MAX_PHOTO_BYTES)) {
+      showError("Each reference photo must be under 10MB. Please remove or resize the large one(s).");
+      return;
+    }
+
+    btn.disabled = true;
+
+    // Host photos on Cloudinary (if configured) and collect their links.
+    let photoNote = "";
+    if (files.length && cloudOn) {
+      btnSpan.textContent = "Uploading photos…";
+      const urls = [];
+      for (const f of files) {
+        try { urls.push(await uploadToCloudinary(f)); } catch (_) { /* skip failed */ }
+      }
+      if (urls.length) photoNote = urls.join("\n");
+      if (urls.length < files.length) {
+        photoNote += (photoNote ? "\n" : "") + `(${files.length - urls.length} photo(s) couldn't upload — client can resend.)`;
+      }
+    } else if (files.length) {
+      photoNote = `${files.length} photo${files.length > 1 ? "s" : ""} ready to share: ${files.map((f) => f.name).join(", ")}`;
+    }
 
     const fd = new FormData();
     fd.append("access_key", WEB3FORMS_KEY);
@@ -392,15 +438,10 @@
     fd.append("Placement", val("placement") || "—");
     fd.append("Approx. size", val("size") || "—");
     fd.append("Idea & story", val("idea"));
-    const refsEl = $("#refs");
-    const files = refsEl && refsEl.files ? Array.from(refsEl.files) : [];
-    if (files.length) {
-      fd.append("Reference photos", `${files.length} photo${files.length > 1 ? "s" : ""} ready to share: ${files.map((f) => f.name).join(", ")}`);
-    }
+    if (photoNote) fd.append("Reference photos", photoNote);
     fd.append("botcheck", "");
 
     btnSpan.textContent = "Sending…";
-    btn.disabled = true;
     try {
       const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: fd });
       const json = await res.json().catch(() => ({}));
@@ -414,10 +455,7 @@
     } catch (err) {
       btn.disabled = false;
       btnSpan.textContent = "Send Request";
-      if (errorBox) {
-        errorBox.textContent = "Something went wrong sending your request. Please try again, or reach out on Instagram @cortezs_tattoos.";
-        errorBox.hidden = false;
-      }
+      showError("Something went wrong sending your request. Please try again, or reach out on Instagram @cortezs_tattoos.");
     }
   });
 
