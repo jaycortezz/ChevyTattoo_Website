@@ -356,6 +356,10 @@ main > section { padding: clamp(5rem, 12vh, 9rem) var(--pad-x); max-width: var(-
 .filedrop__list { font-family: var(--f-body); font-size: 0.82rem; color: var(--bone-soft); letter-spacing: 0; text-transform: none; max-width: 100%; word-break: break-word; }
 .filedrop__list:empty { display: none; }
 
+.booking__error {
+  grid-column: 1 / -1; background: rgba(184,48,44,0.12); border: 1px solid var(--blood-lit); border-radius: 8px;
+  padding: 1rem 1.2rem; color: var(--bone); font-size: 0.95rem;
+}
 .booking__success {
   background: rgba(201,162,75,0.1); border: 1px solid var(--gold); border-radius: 8px;
   padding: 1.4rem; color: var(--bone); font-family: var(--f-serif); font-size: 1.2rem;

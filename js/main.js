@@ -360,8 +360,13 @@
     });
   });
 
-  form.addEventListener("submit", (e) => {
+  const WEB3FORMS_KEY = "e6c85d69-3383-4876-99d7-798dd42f98b6";
+  const errorBox = $("#bookingError");
+  const val = (id) => { const el = $("#" + id); return el ? el.value.trim() : ""; };
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (errorBox) errorBox.hidden = true;
     let ok = true;
     ["name", "email", "style", "idea"].forEach((id) => {
       if (!validateField($("#" + id))) ok = false;
@@ -371,13 +376,49 @@
       firstErr && firstErr.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
+
     const btn = $("button[type=submit]", form);
-    btn.querySelector("span").textContent = "Sending…";
-    setTimeout(() => {
-      form.querySelectorAll(".field, .btn").forEach((el) => el.style.display = "none");
-      success.hidden = false;
-      success.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 900);
+    const btnSpan = btn.querySelector("span");
+
+    const fd = new FormData();
+    fd.append("access_key", WEB3FORMS_KEY);
+    fd.append("subject", "New booking request — Cortez's Tattoos");
+    fd.append("from_name", val("name") || "Cortez's Tattoos Website");
+    fd.append("replyto", val("email"));
+    fd.append("Name", val("name"));
+    fd.append("Email", val("email"));
+    fd.append("Phone", val("phone") || "—");
+    fd.append("Style", val("style"));
+    fd.append("Placement", val("placement") || "—");
+    fd.append("Approx. size", val("size") || "—");
+    fd.append("Idea & story", val("idea"));
+    const refsEl = $("#refs");
+    const files = refsEl && refsEl.files ? Array.from(refsEl.files) : [];
+    if (files.length) {
+      fd.append("Reference photos", `${files.length} photo${files.length > 1 ? "s" : ""} ready to share: ${files.map((f) => f.name).join(", ")}`);
+    }
+    fd.append("botcheck", "");
+
+    btnSpan.textContent = "Sending…";
+    btn.disabled = true;
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: fd });
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && json.success) {
+        Array.from(form.children).forEach((el) => { if (el !== success) el.style.display = "none"; });
+        success.hidden = false;
+        success.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        throw new Error((json && json.message) || "Submission failed");
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btnSpan.textContent = "Send Request";
+      if (errorBox) {
+        errorBox.textContent = "Something went wrong sending your request. Please try again, or reach out on Instagram @cortezs_tattoos.";
+        errorBox.hidden = false;
+      }
+    }
   });
 
   /* ---------- Reference photo upload preview ---------- */
