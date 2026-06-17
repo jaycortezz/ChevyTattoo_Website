@@ -151,15 +151,15 @@
   };
 
   const pieces = [
-    { title: "La Madre",        cat: "portrait",  size: "tall", motif: "portrait" },
+    { title: "La Madre",        cat: "fineline",  size: "tall", motif: "rose"     },
     { title: "Solo Dios",       cat: "lettering", size: "",     motif: "script"   },
     { title: "Sagrado",         cat: "religious", size: "big",  motif: "heart"    },
     { title: "Smoke & Roses",   cat: "fineline",  size: "",     motif: "rose"     },
-    { title: "El Pachuco",      cat: "portrait",  size: "",     motif: "portrait" },
+    { title: "El Pachuco",      cat: "lettering", size: "",     motif: "script"   },
     { title: "Mi Vida Loca",    cat: "lettering", size: "wide", motif: "script"   },
     { title: "Manos que Rezan", cat: "religious", size: "tall", motif: "hands"    },
     { title: "Fina Linea",      cat: "fineline",  size: "big",  motif: "rose"     },
-    { title: "La Catrina",      cat: "portrait",  size: "",     motif: "skull"    },
+    { title: "La Catrina",      cat: "religious", size: "",     motif: "skull"    },
     { title: "Recuerdos",       cat: "lettering", size: "",     motif: "script"   },
     { title: "Guadalupe",       cat: "religious", size: "",     motif: "heart"    },
     { title: "Pétalos",         cat: "fineline",  size: "tall", motif: "rose"     },
@@ -306,7 +306,7 @@
       const files = ((await res.json()).files || []).filter((f) => f.id);
       if (!files.length) return false;
       grid.innerHTML = "";
-      const cats = ["portrait", "lettering", "religious", "fineline"];
+      const cats = ["lettering", "religious", "fineline"];
       files.forEach((f, i) => {
         buildTile({
           art: artSVG("rose", cats[i % cats.length], i),
@@ -379,6 +379,19 @@
       success.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 900);
   });
+
+  /* ---------- Reference photo upload preview ---------- */
+  const refs = $("#refs");
+  const refsList = $("#refsList");
+  if (refs && refsList) {
+    refs.addEventListener("change", () => {
+      const files = Array.from(refs.files || []);
+      if (!files.length) { refsList.textContent = ""; return; }
+      const names = files.slice(0, 4).map((f) => f.name).join(", ");
+      const extra = files.length > 4 ? ` +${files.length - 4} more` : "";
+      refsList.textContent = `${files.length} photo${files.length > 1 ? "s" : ""}: ${names}${extra}`;
+    });
+  }
 
   /* ---------- Year ---------- */
   $("#year").textContent = new Date().getFullYear();

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cortez's Tattoos — Master of Chicano-style fine line, black & grey tattoo artistry. Custom work, lettering, portraits & religious iconography. Book your session." />
+  <meta name="description" content="Cortez's Tattoos — Master of Chicano-style fine line, black & grey tattoo artistry. Custom work, lettering & religious iconography. Book your session." />
   <meta name="theme-color" content="#0a0a0a" />
   <meta property="og:title" content="Cortez's Tattoos — Chicano Fine Line Artistry" />
-  <meta property="og:description" content="Black & grey, fine line, lettering & portraits in the authentic Chicano tradition." />
+  <meta property="og:description" content="Black & grey, fine line & lettering in the authentic Chicano tradition." />
   <meta property="og:type" content="website" />
   <title>Cortez's Tattoos — Chicano Fine Line Artistry</title>
 
@@ -86,13 +86,11 @@
           <span>Black &amp; Grey</span><span>·</span>
           <span>Fine Line</span><span>·</span>
           <span>Lettering</span><span>·</span>
-          <span>Portraits</span><span>·</span>
           <span>Religious</span><span>·</span>
           <span>Lowrider Culture</span><span>·</span>
           <span>Black &amp; Grey</span><span>·</span>
           <span>Fine Line</span><span>·</span>
           <span>Lettering</span><span>·</span>
-          <span>Portraits</span><span>·</span>
           <span>Religious</span><span>·</span>
           <span>Lowrider Culture</span><span>·</span>
         </div>
@@ -115,10 +113,6 @@
         <div class="about__portrait reveal" data-cursor="hover">
           <div class="about__portrait-frame" data-parallax="0.08">
             <div class="portrait-art" aria-hidden="true"></div>
-          </div>
-          <div class="about__badge">
-            <span>Cortez</span>
-            <span>Tattoos</span>
           </div>
         </div>
 
@@ -204,7 +198,7 @@
         <article class="step reveal">
           <span class="step__num">02</span>
           <h3>Custom Design</h3>
-          <p>Cortez hand-draws a one-of-one stencil built around your body and your story. Revisions until it's right.</p>
+          <p>Chevy hand-draws a one-of-one stencil built around your body and your story. Revisions until it's right.</p>
         </article>
         <article class="step reveal">
           <span class="step__num">03</span>
@@ -228,7 +222,7 @@
           <h2 class="section-title">Book a Session</h2>
         </div>
         <p class="booking__lead reveal">
-          Tell Cortez what you're carrying. Every request gets a personal
+          Tell Chevy what you're carrying. Every request gets a personal
           reply within 48 hours with availability and a deposit quote.
         </p>
 
@@ -253,7 +247,6 @@
           <div class="field reveal">
             <select id="style" name="style" required data-cursor="hover">
               <option value="" disabled selected></option>
-              <option value="portrait">Portrait — black &amp; grey</option>
               <option value="lettering">Lettering / script</option>
               <option value="religious">Religious / iconography</option>
               <option value="fineline">Fine line / single needle</option>
@@ -280,12 +273,25 @@
             <span class="field__error" data-for="idea"></span>
           </div>
 
+          <div class="field field--full reveal">
+            <span class="filedrop__heading">Reference photos <span class="opt">(optional)</span></span>
+            <label class="filedrop" for="refs" data-cursor="hover">
+              <input type="file" id="refs" name="refs" accept="image/*" multiple />
+              <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 16V4"></path><path d="M7 9l5-5 5 5"></path>
+                <path d="M5 16v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"></path>
+              </svg>
+              <span class="filedrop__text">Tap to add photos, or drag them here</span>
+              <span class="filedrop__list" id="refsList"></span>
+            </label>
+          </div>
+
           <button type="submit" class="btn btn--solid btn--block reveal" data-cursor="hover">
             <span>Send Request</span>
           </button>
 
           <p class="booking__success" id="bookingSuccess" hidden>
-            Solid. Your request is in — Cortez will reach out within 48 hours.
+            Solid. Your request is in — Chevy will reach out within 48 hours.
             <span>Stay creative.</span>
           </p>
         </form>
