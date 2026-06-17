@@ -40,9 +40,8 @@
 
   <!-- Navigation -->
   <header class="nav" id="nav">
-    <a href="#home" class="nav__brand" data-cursor="hover">
-      <span class="nav__brand-mark">Cortez's</span>
-      <span class="nav__brand-sub">Tattoos</span>
+    <a href="#home" class="nav__brand" data-cursor="hover" aria-label="Cortez's Tattoos — home">
+      <img class="nav__logo" src="assets/Cortez%20Tattoo%20Logo_2024-white.png" alt="Cortez's Tattoos" />
     </a>
     <nav class="nav__links" id="navLinks" aria-label="Primary">
       <a href="#about" data-cursor="hover">About</a>
@@ -319,9 +318,14 @@
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <div class="footer__big" aria-hidden="true">CORTEZ</div>
+    <div class="footer__logos">
+      <img class="footer__logo" src="assets/Cortez%20Tattoo%20Logo_2024-white.png" alt="Cortez's Tattoos" />
+      <a class="footer__logo-btn" href="design.html" data-cursor="hover" aria-label="Chevy Cortez — design work">
+        <img class="footer__logo footer__logo--chevy" src="assets/CHEVY%20LOGO-wht.png" alt="Chevy Cortez Design" />
+        <span class="footer__logo-tag">Design Work →</span>
+      </a>
+    </div>
     <div class="footer__row">
-      <span class="footer__brand">Cortez's Tattoos</span>
       <nav class="footer__links" aria-label="Footer">
         <a href="#about" data-cursor="hover">About</a>
         <a href="#work" data-cursor="hover">Work</a>

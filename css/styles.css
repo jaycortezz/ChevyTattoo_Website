@@ -128,9 +128,10 @@ button { font-family: inherit; cursor: none; }
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
 }
-.nav__brand { display: flex; flex-direction: column; line-height: 0.82; }
-.nav__brand-mark { font-family: var(--f-script); font-size: 1.9rem; color: var(--gold-bright); }
-.nav__brand-sub { font-family: var(--f-impact); letter-spacing: 0.42em; font-size: 0.72rem; text-transform: uppercase; color: var(--bone); padding-left: 0.2em; }
+.nav__brand { display: flex; align-items: center; }
+.nav__logo { height: 52px; width: auto; display: block; transition: height 0.4s var(--ease); }
+.nav.is-scrolled .nav__logo { height: 40px; }
+@media (max-width: 540px) { .nav__logo { height: 42px; } .nav.is-scrolled .nav__logo { height: 34px; } }
 .nav__links { display: flex; align-items: center; gap: 2.4rem; }
 .nav__links a {
   font-family: var(--f-impact); letter-spacing: 0.18em; text-transform: uppercase; font-size: 0.92rem;
@@ -368,13 +369,24 @@ main > section { padding: clamp(5rem, 12vh, 9rem) var(--pad-x); max-width: var(-
 
 /* ---------- FOOTER ---------- */
 .footer { position: relative; padding: 4rem var(--pad-x) 2.5rem; border-top: 1px solid var(--line); overflow: hidden; }
-.footer__big {
-  font-family: var(--f-display); text-transform: uppercase; text-align: center;
-  font-size: clamp(4rem, 22vw, 18rem); line-height: 0.8; color: transparent;
-  -webkit-text-stroke: 1px rgba(244,239,227,0.08); letter-spacing: 0.02em; margin-bottom: 2rem; user-select: none;
+.footer__logos {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: clamp(2rem, 7vw, 6rem); margin-bottom: 3rem;
 }
+.footer__logo { height: clamp(56px, 9vw, 96px); width: auto; display: block; }
+.footer__logo-btn {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 0.7rem;
+  transition: transform 0.4s var(--ease);
+}
+.footer__logo-btn:hover { transform: translateY(-4px); }
+.footer__logo--chevy { height: clamp(40px, 6.5vw, 70px); transition: filter 0.4s var(--ease); filter: drop-shadow(0 0 0 transparent); }
+.footer__logo-btn:hover .footer__logo--chevy { filter: drop-shadow(0 6px 16px rgba(184,48,44,0.5)); }
+.footer__logo-tag {
+  font-family: var(--f-impact); letter-spacing: 0.22em; text-transform: uppercase; font-size: 0.72rem;
+  color: var(--smoke); transition: color 0.35s var(--ease);
+}
+.footer__logo-btn:hover .footer__logo-tag { color: var(--gold); }
 .footer__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem; max-width: var(--maxw); margin: 0 auto; }
-.footer__brand { font-family: var(--f-script); font-size: 1.6rem; color: var(--gold-bright); }
 .footer__links { display: flex; gap: 1.8rem; }
 .footer__links a { font-family: var(--f-impact); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; color: var(--bone-soft); transition: color 0.3s; }
 .footer__links a:hover { color: var(--gold); }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Chevy Cortez — design work. Coming soon." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Chevy Cortez — Design Work</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Inter:wght@300;400;500&family=Mr+Dafoe&display=swap" rel="stylesheet" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .design { min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 6rem var(--pad-x); position: relative; }
+    .design__logo { height: clamp(90px, 16vw, 170px); width: auto; margin-bottom: 2.5rem; filter: drop-shadow(0 10px 30px rgba(184,48,44,0.35)); }
+    .design__eyebrow { font-family: var(--f-impact); letter-spacing: 0.5em; text-transform: uppercase; font-size: 0.85rem; color: var(--gold); margin-bottom: 1.4rem; }
+    .design__title { font-family: var(--f-display); text-transform: uppercase; font-size: clamp(2.8rem, 11vw, 8rem); line-height: 0.88; letter-spacing: -0.01em; }
+    .design__title span { font-family: var(--f-script); text-transform: none; color: var(--gold-bright); display: block; font-size: 0.6em; }
+    .design__lead { max-width: 520px; margin: 2rem auto 2.8rem; font-family: var(--f-serif); font-size: 1.35rem; line-height: 1.5; color: var(--bone-soft); }
+    .design__soon { font-family: var(--f-impact); letter-spacing: 0.35em; text-transform: uppercase; font-size: 0.8rem; color: var(--smoke); margin-bottom: 2.6rem; }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <header class="nav is-scrolled" id="nav">
+    <a href="index.html" class="nav__brand" data-cursor="hover" aria-label="Cortez's Tattoos — home">
+      <img class="nav__logo" src="assets/Cortez%20Tattoo%20Logo_2024-white.png" alt="Cortez's Tattoos" />
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="index.html#work" data-cursor="hover">Tattoos</a>
+      <a href="index.html#booking" class="nav__cta" data-cursor="hover">Book a Session</a>
+    </nav>
+  </header>
+
+  <main class="design">
+    <img class="design__logo" src="assets/CHEVY%20LOGO-wht.png" alt="Chevy Cortez Design" />
+    <p class="design__eyebrow">Chevy Cortez</p>
+    <h1 class="design__title">Design <span>work</span></h1>
+    <p class="design__lead">
+      A home for Chevy's graphic &amp; design work is on the way — logos,
+      lettering, flash, and custom pieces beyond the skin.
+    </p>
+    <p class="design__soon">Coming Soon</p>
+    <a href="index.html" class="btn btn--ghost" data-cursor="hover">← Back to Cortez's Tattoos</a>
+  </main>
+
+  <script>
+    // Minimal custom cursor for this page (mirrors the main site).
+    (function () {
+      var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      if (!fine) return;
+      var c = document.querySelector(".cursor"), d = document.querySelector(".cursor-dot");
+      var mx = 0, my = 0, cx = 0, cy = 0;
+      document.addEventListener("mousemove", function (e) {
+        mx = e.clientX; my = e.clientY;
+        d.style.transform = "translate(" + mx + "px," + my + "px) translate(-50%,-50%)";
+      });
+      (function loop() {
+        cx += (mx - cx) * 0.18; cy += (my - cy) * 0.18;
+        c.style.transform = "translate(" + cx + "px," + cy + "px) translate(-50%,-50%)";
+        requestAnimationFrame(loop);
+      })();
+      document.addEventListener("mouseover", function (e) {
+        c.classList.toggle("is-hover", !!e.target.closest("[data-cursor]"));
+      });
+    })();
+  </script>
+</body>
+</html>
