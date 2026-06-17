@@ -249,8 +249,6 @@
 
   const IG_URL = "https://www.instagram.com/cortezs_tattoos/";
   const grid = $("#workGrid");
-  // Repeating size rhythm keeps the asymmetric layout for any number of photos.
-  const SIZES = ["tall", "", "big", "", "", "wide", "tall", "big", "", "", "", "tall"];
   const IG_PILL = `
     <span class="work-item__view">
       <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -263,7 +261,7 @@
 
   function buildTile(opts) {
     const item = document.createElement("a");
-    item.className = "work-item reveal " + (opts.size || "");
+    item.className = "work-item reveal";
     item.href = opts.href || IG_URL;
     item.target = "_blank";
     item.rel = "noopener";
@@ -289,7 +287,6 @@
         art: artSVG(p.motif, p.cat, i),
         photo: `assets/work/${String(i + 1).padStart(2, "0")}.jpg`,
         title: p.title,
-        size: p.size,
       });
     });
   }
@@ -314,7 +311,6 @@
         buildTile({
           art: artSVG("rose", cats[i % cats.length], i),
           photo: `https://drive.google.com/thumbnail?id=${f.id}&sz=w1600`,
-          size: SIZES[i % SIZES.length],
           href: IG_URL,
         });
       });
