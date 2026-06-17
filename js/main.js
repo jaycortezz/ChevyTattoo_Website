@@ -367,8 +367,8 @@
      leave blank to just list the filenames instead.
        1. CLOUDINARY_CLOUD  — your Cloudinary "cloud name"
        2. CLOUDINARY_PRESET — an UNSIGNED upload preset name */
-  const CLOUDINARY_CLOUD = "";
-  const CLOUDINARY_PRESET = "";
+  const CLOUDINARY_CLOUD = "daymczmxl";
+  const CLOUDINARY_PRESET = "cortez-bookings";
   const MAX_PHOTO_BYTES = 10 * 1024 * 1024; // 10MB per photo
 
   const errorBox = $("#bookingError");
